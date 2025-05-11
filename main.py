@@ -1,7 +1,9 @@
 import cv2
+import cv2.text
 import mediapipe as mp 
 import math
 import time
+import random
 from ursina import *
 import threading
 
@@ -88,6 +90,13 @@ def main():
                 
                 print(switch_state, touch_state)
                 if switch_state == True:
+                    text = str(distance)
+                    h,w, _ = frames.shape
+                    cx1, cy1 = int(lm_list[4][0] * w), int(lm_list[4][1] * h)  # 
+                    cx2, cy2 = int(lm_list[8][0] * w), int(lm_list[8][1] * h)
+                    cv2.circle(frames, (cx1,cy1), 20, (255,80,221), 3)
+                    cv2.circle(frames, (cx2,cy2), 20, (0,0,221), 3)
+                    cv2.line(frames, (cx1,cy1),(cx2,cy2), (0,0,221), 2)
                     hand_distance = distance
             
 
